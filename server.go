@@ -484,8 +484,21 @@ func (s *Server) listen(l net.Listener, identifier id.ID) {
 func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	resp, err := s.RoundTrip(r)
 	if err == errUnauthorised {
-		w.Header().Set("WWW-Authenticate", "Basic realm=\"User Visible Realm\"")
+		w.Header().Set("WWW-Authenticate", "Basic realm=\"Gerbil\"")
 		http.Error(w, err.Error(), http.StatusUnauthorized)
+		return
+	}
+	if err == errClientNotSubscribed {
+		s.logger.Log(
+			"level", 0,
+			"action", "round trip failed",
+			"addr", r.RemoteAddr,
+			"host", r.Host,
+			"url", r.URL,
+			"err", err,
+		)
+		w.Header().Set("Location", "/server/gerbil/status/disconnected.html")
+		http.Error(w, "Gerbil agent not up? Redirect to /server/gerbil/status/disconnected.html", http.StatusFound)
 		return
 	}
 	if err != nil {

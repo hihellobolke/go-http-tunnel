@@ -4,4 +4,4 @@
 
 package main
 
-var version = "snapshot"
+var version = "0.1"

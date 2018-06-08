@@ -12,13 +12,11 @@ import (
 	"net"
 	"net/url"
 	"os"
-	"sort"
 
 	"gopkg.in/yaml.v2"
 
 	"github.com/cenkalti/backoff"
 	"github.com/mmatczuk/go-http-tunnel"
-	"github.com/mmatczuk/go-http-tunnel/id"
 	"github.com/mmatczuk/go-http-tunnel/log"
 	"github.com/mmatczuk/go-http-tunnel/proto"
 )
@@ -27,11 +25,6 @@ func main() {
 	opts, err := parseArgs()
 	if err != nil {
 		fatal(err.Error())
-	}
-
-	if opts.version {
-		fmt.Println(version)
-		return
 	}
 
 	logger := log.NewFilterLogger(log.NewStdLogger(), opts.logLevel)
@@ -43,31 +36,6 @@ func main() {
 	}
 
 	switch opts.command {
-	case "id":
-		cert, err := tls.LoadX509KeyPair(config.TLSCrt, config.TLSKey)
-		if err != nil {
-			fatal("failed to load key pair: %s", err)
-		}
-		x509Cert, err := x509.ParseCertificate(cert.Certificate[0])
-		if err != nil {
-			fatal("failed to parse certificate: %s", err)
-		}
-		fmt.Println(id.New(x509Cert.Raw))
-
-		return
-	case "list":
-		var names []string
-		for n := range config.Tunnels {
-			names = append(names, n)
-		}
-
-		sort.Strings(names)
-
-		for _, n := range names {
-			fmt.Println(n)
-		}
-
-		return
 	case "start":
 		tunnels := make(map[string]*Tunnel)
 		for _, arg := range opts.args {

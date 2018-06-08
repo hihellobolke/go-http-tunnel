@@ -26,15 +26,48 @@
   version = "v1.0.0"
 
 [[projects]]
+  name = "github.com/mmatczuk/go-http-tunnel"
+  packages = [
+    ".",
+    "id",
+    "log",
+    "proto",
+    "tunnelmock"
+  ]
+  revision = "75a30abccc8db9d1149845e9985e80cca57758a2"
+  version = "2.1"
+
+[[projects]]
   branch = "master"
   name = "golang.org/x/net"
-  packages = ["context","http2","http2/hpack","idna","lex/httplex"]
+  packages = [
+    "context",
+    "http2",
+    "http2/hpack",
+    "idna",
+    "lex/httplex"
+  ]
   revision = "c7086645de248775cbf2373cf5ca4d2fa664b8c1"
 
 [[projects]]
   branch = "master"
   name = "golang.org/x/text"
-  packages = ["collate","collate/build","internal/colltab","internal/gen","internal/tag","internal/triegen","internal/ucd","language","secure/bidirule","transform","unicode/bidi","unicode/cldr","unicode/norm","unicode/rangetable"]
+  packages = [
+    "collate",
+    "collate/build",
+    "internal/colltab",
+    "internal/gen",
+    "internal/tag",
+    "internal/triegen",
+    "internal/ucd",
+    "language",
+    "secure/bidirule",
+    "transform",
+    "unicode/bidi",
+    "unicode/cldr",
+    "unicode/norm",
+    "unicode/rangetable"
+  ]
   revision = "88f656faf3f37f690df1a32515b479415e1a6769"
 
 [[projects]]
@@ -46,6 +79,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "654fea302b8b5a71ce4f36f4097d0c0caa8150e46109cfbdd462adcd054a6768"
+  inputs-digest = "006bdf3d17b5c535fe7e68f54eac59915d03fb683741599f32d88d12c2f69e64"
   solver-name = "gps-cdcl"
   solver-version = 1
