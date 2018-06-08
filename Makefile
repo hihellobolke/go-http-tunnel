@@ -68,8 +68,8 @@ get-tools:
 	@go get -u honnef.co/go/tools/cmd/megacheck
 
 OUTPUT_DIR = build
-#OS = "darwin linux"
-OS = "linux"
+OS = "darwin linux"
+#OS = "linux"
 ARCH = "amd64"
 OSARCH = ""
 #GIT_COMMIT = $(shell git describe --always)

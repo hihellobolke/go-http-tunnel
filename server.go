@@ -497,8 +497,8 @@ func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			"url", r.URL,
 			"err", err,
 		)
-		w.Header().Set("Location", "/server/gerbil/status/disconnected.html")
-		http.Error(w, "Gerbil agent not up? Redirect to /server/gerbil/status/disconnected.html", http.StatusFound)
+		w.Header().Set("Location", "/server/gerbil/status/tunnel-down.html")
+		http.Error(w, "Gerbil agent not up? Redirect to /server/gerbil/status/tunnel-down.html", http.StatusFound)
 		return
 	}
 	if err != nil {
@@ -510,10 +510,24 @@ func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			"url", r.URL,
 			"err", err,
 		)
-
-		http.Error(w, err.Error(), http.StatusBadGateway)
+		w.Header().Set("Location", "/server/gerbil/status/client-app-down.html")
+		http.Error(w, "Gerbil agent not up? Redirect to /server/gerbil/status/client-app-down.html", http.StatusFound)
 		return
+		//http.Error(w, err.Error(), http.StatusBadGateway)
+		//return
 	}
+	//if err != nil {
+	//	s.logger.Log(
+	//		"level", 0,
+	//		"action", "round trip failed",
+	//		"addr", r.RemoteAddr,
+	//		"host", r.Host,
+	//		"url", r.URL,
+	//		"err", err,
+	//	)
+	//	http.Error(w, err.Error(), http.StatusBadGateway)
+	//	return
+	//}
 	defer resp.Body.Close()
 
 	copyHeader(w.Header(), resp.Header)
