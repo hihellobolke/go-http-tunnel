@@ -516,6 +516,27 @@ func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		//http.Error(w, err.Error(), http.StatusBadGateway)
 		//return
 	}
+
+	s.logger.Log(
+		"level", 0,
+		"action", "testing ovveride",
+		"addr", r.RemoteAddr,
+		"host", r.Host,
+		"resp_code", resp.StatusCode,
+	)
+
+	if resp.StatusCode == 502 {
+		s.logger.Log(
+			"level", 0,
+			"action", "502 error override",
+			"addr", r.RemoteAddr,
+			"host", r.Host,
+			"url", r.URL,
+		)
+		w.Header().Set("Location", "/server/gerbil/status/client-app-down.html")
+		http.Error(w, "Gerbil agent not up? Redirect to /server/gerbil/status/client-app-down.html", http.StatusFound)
+		return
+	}
 	//if err != nil {
 	//	s.logger.Log(
 	//		"level", 0,

@@ -50,7 +50,7 @@ type options struct {
 }
 
 func parseArgs() (*options, error) {
-	logLevel := flag.Int("log-level", 1, "Level of messages to log, 0-3")
+	logLevel := flag.Int("log-level", 3, "Level of messages to log, 0-3")
 	flag.Parse()
 
 	opts := &options{

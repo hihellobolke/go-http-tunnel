@@ -59,6 +59,7 @@ func loadClientConfigFromFile(file string) (*ClientConfig, error) {
 	c := ClientConfig{
 		TLSCrt: filepath.Join(filepath.Dir(file), "client.crt"),
 		TLSKey: filepath.Join(filepath.Dir(file), "client.key"),
+		RootCA: filepath.Join(filepath.Dir(file), "client.ca"),
 		Backoff: BackoffConfig{
 			Interval:    DefaultBackoffInterval,
 			Multiplier:  DefaultBackoffMultiplier,
