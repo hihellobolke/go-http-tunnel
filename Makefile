@@ -58,7 +58,7 @@ get-deps:
 get-tools:
 	@echo "==> Installing tools..."
 	@go get -u github.com/golang/dep/cmd/dep
-	@go get -u github.com/golang/lint/golint
+	@go get -u github.com/golang/x/lint/golint
 	@go get -u github.com/golang/mock/gomock
 
 	@go get -u github.com/client9/misspell/cmd/misspell
@@ -66,6 +66,7 @@ get-tools:
 	@go get -u github.com/mitchellh/gox
 	@go get -u github.com/tcnksm/ghr
 	@go get -u honnef.co/go/tools/cmd/megacheck
+
 
 OUTPUT_DIR = build
 OS = "darwin linux"
